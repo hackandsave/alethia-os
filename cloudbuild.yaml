@@ -5,4 +5,4 @@ steps:
   args: ['push', 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-mvp:latest']
 images:
 - 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-mvp:latest'
-logsBucket: 'gs://alethia-os-build-logs'
+logsBucket: 'gs://crack-glider-470520-r7-build-logs'
