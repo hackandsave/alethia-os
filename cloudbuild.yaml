@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-mvp:latest', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-mvp:latest']
+images:
+- 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-mvp:latest'
+logsBucket: 'gs://crack-glider-470520-r7-build-logs'
