@@ -1,8 +1,26 @@
 steps:
+# Step 1: Install frontend dependencies
+# This step runs 'npm install' inside the 'frontend' directory.
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+  dir: 'frontend'
+
+# Step 2: Build the frontend application
+# This step runs 'npm run build' inside the 'frontend' directory.
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build']
+  dir: 'frontend'
+
+# Step 3: Build the final Docker image
+# This step runs 'docker build' from the root directory. It will use your
+# existing Dockerfile, which is correctly configured to copy the pre-built
+# frontend assets from the 'frontend/dist' folder.
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-os:latest', '.']
 
+# This section specifies the final image to be pushed to the Artifact Registry.
 images:
 - 'us-central1-docker.pkg.dev/crack-glider-470520-r7/aletheia-repo/aletheia-os:latest'
 
+# This specifies the bucket for storing logs.
 logsBucket: 'gs://crack-glider-470520-r7-build-logs'
