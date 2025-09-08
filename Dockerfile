@@ -8,8 +8,8 @@ WORKDIR /app/frontend
 # Copy package.json AND package-lock.json for consistent installs
 COPY frontend/package*.json ./
 
-# Use 'npm ci' for faster, more reliable, and secure builds in CI/CD environments
-RUN npm ci
+# Use 'npm install' which is more flexible if package-lock.json is missing
+RUN npm install
 
 # Copy all the frontend source code, including tsconfig.json
 COPY frontend/ ./
@@ -29,7 +29,6 @@ COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the built frontend assets from the 'build' stage
-# This is the key to a small and secure final image
 COPY --from=build /app/frontend/dist ./www
 
 # Copy the backend source code
